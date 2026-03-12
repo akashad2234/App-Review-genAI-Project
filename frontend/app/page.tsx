@@ -172,15 +172,15 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="space-y-8">
+    <main className="space-y-8 text-center">
       <section className="card mb-8">
         <div className="card-header pb-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#04ad83]">
             Live · Play Store
           </p>
-          <h1 className="mt-2 text-3xl font-semibold leading-tight text-slate-50">
+          <h1 className="mt-2 text-3xl font-semibold leading-tight text-[#04ad83]">
             Groww App
-            <span className="block text-emerald-300">Review Pulse</span>
+            <span className="block">Review Pulse</span>
           </h1>
           <p className="mt-3 text-sm text-slate-400 max-w-xl">
             Scrapes live reviews, runs AI analysis, and delivers a one-page
@@ -188,10 +188,10 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="card-body pb-4">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div className="space-y-4">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between text-left">
+            <div className="space-y-4 md:w-2/3">
               <div>
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[#04ad83]">
                   Review window
                 </p>
                 <div className="pill-toggle-group">
@@ -212,7 +212,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div>
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[#04ad83]">
                   Email recipients
                   <span className="ml-1 text-[0.65rem] font-normal text-slate-500">
                     (optional, comma-separated)
@@ -228,7 +228,7 @@ export default function DashboardPage() {
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[0.75rem] text-slate-300">
+                <label className="mb-1 block text-[0.75rem] text-[#04ad83]">
                   Max reviews to fetch
                 </label>
                 <input

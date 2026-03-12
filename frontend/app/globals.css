@@ -11,37 +11,6 @@ body {
   color: #e5e7eb;
 }
 
-.nav-tab {
-  position: relative;
-  padding: 0.35rem 0;
-  color: #9ca3af;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-tab::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.25rem;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(to right, #22c55e, #a3e635);
-  opacity: 0;
-  transform: scaleX(0.6);
-  transition: opacity 0.12s ease, transform 0.12s ease;
-}
-
-.nav-tab-active {
-  color: #e5e7eb;
-}
-
-.nav-tab-active::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
 button {
   font: inherit;
 }
@@ -99,14 +68,14 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(to right, #22c55e, #a3e635);
+  background-color: #04ad83;
   color: #020617;
-  box-shadow: 0 14px 30px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 14px 30px rgba(4, 173, 131, 0.45);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 20px 40px rgba(4, 173, 131, 0.65);
 }
 
 .btn-outline {
@@ -157,8 +126,8 @@ button {
 }
 
 .pill-toggle-active {
-  background: linear-gradient(to right, #22c55e, #a3e635);
+  background-color: #04ad83;
   color: #020617;
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.55);
+  box-shadow: 0 10px 25px rgba(4, 173, 131, 0.55);
 }
 
