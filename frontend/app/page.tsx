@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 type RunSummary = {
   run_id: string | null;
@@ -28,7 +28,7 @@ export default function DashboardPage() {
   const [runMessage, setRunMessage] = useState<string | null>(null);
   const [showReport, setShowReport] = useState(false);
   const [weeks, setWeeks] = useState<number>(8);
-  const [maxReviews, setMaxReviews] = useState<number>(5000);
+  const [maxReviews, setMaxReviews] = useState<number | "">(5000);
   const [recipientEmail, setRecipientEmail] = useState<string>("");
   const [recipientName, setRecipientName] = useState<string>("");
 
@@ -241,8 +241,16 @@ export default function DashboardPage() {
               <input
                 type="number"
                 className="w-full rounded-md border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 outline-none focus:border-emerald-400"
-                value={maxReviews}
-                onChange={(e) => setMaxReviews(Number(e.target.value) || 0)}
+                value={maxReviews === "" ? "" : maxReviews}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  const value = e.target.value;
+                  if (value === "") {
+                    setMaxReviews("");
+                    return;
+                  }
+                  const parsed = Number(value);
+                  setMaxReviews(Number.isNaN(parsed) ? 0 : Math.max(0, parsed));
+                }}
                 min={0}
               />
             </div>
