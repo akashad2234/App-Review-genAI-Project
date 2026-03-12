@@ -1,0 +1,42 @@
+{
+  "source": "data\\reports\\reviews\\reviews.json",
+  "total_reviews": 131,
+  "sampled_reviews": 131,
+  "themes": [
+    {
+      "name": "Overall App Experience",
+      "description": "Many users express high satisfaction with the app, finding it very good, secure, easy to use, and a great platform for investing and trading.",
+      "sentiment": "positive",
+      "reviews": [
+        {
+          "reviewId": "e8851070-8294-4439-9612-59ec904a4926",
+          "rating": 5,
+          "text": "nice game groww kro or paise kamai",
+          "date": "2026-03-11",
+          "thumbsUpCount": 0,
+          "language": null
+        },
+        {
+          "reviewId": "b9789dda-261d-4e63-a3a1-325f3224ba90",
+          "rating": 5,
+          "text": "very good app",
+          "date": "2026-03-11",
+          "thumbsUpCount": 0,
+          "language": null
+        }
+      ]
+    },
+    {
+      "name": "External Fund Tracking",
+      "description": "Users are consistently frustrated by the inability to track or refresh their external mutual fund holdings, as this crucial feature is frequently paused or not working.",
+      "sentiment": "negative",
+      "reviews": []
+    },
+    {
+      "name": "High Brokerage & Charges",
+      "description": "A significant number",
+      "sentiment": "negative",
+      "reviews": []
+    }
+  ]
+}

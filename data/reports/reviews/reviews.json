@@ -1,0 +1,1111 @@
+{
+  "phase": 1,
+  "name": "Review Ingestion Pipeline",
+  "description": "Imported Groww Play Store reviews, scrubbed PII, and persisted clean data.",
+  "llm_provider": "Groq",
+  "modules": {
+    "config": {
+      "path": "src/config.py",
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "max_tokens": 2048,
+        "temperature": 0.2
+      },
+      "reviews": {
+        "app_id": "com.groww.v2",
+        "review_window_weeks": 8,
+        "max_reviews": 200
+      }
+    },
+    "llm_client": {
+      "path": "src/llm/groq_client.py",
+      "features": [
+        "chat_completion wrapper",
+        "config driven defaults",
+        "retry with exponential backoff",
+        "structured result with content and raw response"
+      ]
+    },
+    "pii_scrubber": {
+      "path": "src/utils/pii_scrubber.py",
+      "removes": [
+        "email addresses",
+        "phone numbers (Indian and generic international)",
+        "Aadhaar like 12 digit IDs"
+      ],
+      "replacements": {
+        "email": "[email removed]",
+        "phone": "[phone removed]",
+        "id": "[id removed]"
+      }
+    }
+  },
+  "tests": {
+    "pii_scrubber": "tests/test_pii_scrubber.py",
+    "groq_client": "tests/test_groq_client.py"
+  },
+  "reviews": [
+    {
+      "reviewId": "e8851070-8294-4439-9612-59ec904a4926",
+      "rating": 5,
+      "text": "nice game groww kro or paise kamai",
+      "date": "2026-03-11",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "b9789dda-261d-4e63-a3a1-325f3224ba90",
+      "rating": 5,
+      "text": "very good app",
+      "date": "2026-03-11",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "53b03d07-4c44-48ac-99da-08f4e5713342",
+      "rating": 1,
+      "text": "not able to refresh the external fund , earlier used to refresh but recently that feature is decomposed.",
+      "date": "2026-03-11",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "b474f139-2619-4131-bb1d-d130a7d18969",
+      "rating": 1,
+      "text": "I don't know why groww removed for external mutual funds from showing in the app",
+      "date": "2026-03-11",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "4e527454-db30-4e51-a15b-c46934207307",
+      "rating": 5,
+      "text": "it's too much good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "3df27efc-bea7-406b-88a1-9df020761293",
+      "rating": 5,
+      "text": "nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "af381b7f-c9b0-4262-91e5-54a8d2a15f9e",
+      "rating": 5,
+      "text": "great trading app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f612311d-7d33-4ee3-bef4-1372f39d7de4",
+      "rating": 5,
+      "text": "nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c86abc01-4efc-4cba-a664-133fac120581",
+      "rating": 5,
+      "text": "Good Responsible",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "4cd0a188-ace4-49ce-9684-cb8fb1e692d8",
+      "rating": 1,
+      "text": "loote chhe users ne charges thi",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6e8b2137-c824-4de2-82f0-e2535631708c",
+      "rating": 5,
+      "text": "good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "36f38684-d404-4557-8385-6148413fa65d",
+      "rating": 5,
+      "text": "very good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1f2b44e9-5644-41fb-85d2-29865e8ecbe5",
+      "rating": 1,
+      "text": "very high broker rate in every transaction or share sell , Neo kotak is the best aap for trading",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "7318d24c-23f2-4bc8-aae7-ec5ed7e9a04b",
+      "rating": 5,
+      "text": "aalll in one lovely inzoi",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "16f637bb-d804-40ee-8dbb-27eeabae8246",
+      "rating": 2,
+      "text": "new update is not so good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "655edbdf-e8ee-49d2-b7ea-82f7667e4600",
+      "rating": 5,
+      "text": "nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "ab081b7b-1a8e-43bd-bafa-233fcbf376c5",
+      "rating": 5,
+      "text": "very good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "3c14bc2c-0507-4c7e-9ed9-0083f9c67e4c",
+      "rating": 3,
+      "text": "sometimes I hack and am unable to order to sell or buy at that time. It needs to work on its smoothness and authenticity.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "5f3c722b-d3e9-4db5-a08c-5985dca27ab8",
+      "rating": 2,
+      "text": "unable to track my external fund it was important to track my SIP PLEASE update the app and give a solution please",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "31b2aac8-d852-457a-b774-9f97be38badb",
+      "rating": 1,
+      "text": "after using it for almost four years uninstalling it as it has started putting more extra charges along with brokerage shifting to dhan",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1a9f934d-b4a3-488a-815b-3d13b37491fe",
+      "rating": 5,
+      "text": "Nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "a9e1ad2b-ae22-49dc-a02a-7500d7f731b6",
+      "rating": 5,
+      "text": "Scalper mode me doule screen ki suvidha mile to bhut hi accha hoga scalpers ke liye, like as a sahi app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "2992322b-adf7-4be3-8120-547cf52fba81",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "089d27d3-0f29-4181-a580-938c164e743d",
+      "rating": 5,
+      "text": "i like it",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "070380e6-11ae-4f73-b19f-01b448d5dda9",
+      "rating": 5,
+      "text": "groww app daily timeframe candlestick wrong showing",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "15ed6e12-b44b-48e0-a5d4-305031cfdecd",
+      "rating": 1,
+      "text": "bhai ye aap orders execution me farji karta h",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "253d03b6-37bc-4001-9b98-b94555202f24",
+      "rating": 5,
+      "text": "widra very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bdc484f1-83b4-49dc-8beb-32fb1617f72d",
+      "rating": 5,
+      "text": "it is very secure and advance",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6dcc2d75-6c90-4683-96ce-e2794be39a83",
+      "rating": 5,
+      "text": "it is very good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1a85a8f6-51ac-4e25-95de-86958e4620db",
+      "rating": 5,
+      "text": "so very nice good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "9739be4a-e3b6-4c12-a8b7-13a095033248",
+      "rating": 2,
+      "text": "some time face problem by or sell",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "e1e7dd2f-2035-4e23-b4ec-f3f541bcebe5",
+      "rating": 1,
+      "text": "Rand Customer Service  BKL Ko 10 min Tak Call karne ka try Kia Koi nahi uthaya  uninstall kar raha",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "d09627ff-4d05-4692-b89f-0ab70577c3cf",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "5ac0e586-e657-46f4-ac43-671962fd6eeb",
+      "rating": 1,
+      "text": "fraud app not good for everyone",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6c4f2ce9-6d36-4664-831e-ddc0ba1632b8",
+      "rating": 5,
+      "text": "1 month ho gya abhi tak mutual fund ki payment received nahi hue",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "94cfaf86-94be-4b7c-80ef-ddada353abd1",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "d7fe729f-c8db-4eed-a029-cece784dc2a2",
+      "rating": 1,
+      "text": "Dear Team, Please look into this, external funds unable to track in Groww application. Few days error facing i.e. \"Tracking external funds is currently paused\". Mutual funds updated details not showing.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 1,
+      "language": null
+    },
+    {
+      "reviewId": "9600f1c3-441b-40f5-b8a8-528d1d5473da",
+      "rating": 5,
+      "text": "perfect App, with good and timely withdrawal at low rate very much satisfied",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "9db87c89-0420-4d39-aff6-855e8b87d734",
+      "rating": 1,
+      "text": "not a reliable app..",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "86857ab8-b265-4067-8491-490444405a82",
+      "rating": 1,
+      "text": "customer service is very bad bina order apne aap kar dete h grow me aaj ka hi order dekh sakte h",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "d4aa0d6d-e5dc-47ff-9948-82fe4f5b3653",
+      "rating": 2,
+      "text": "add multiple basket for future and options",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "b1802bf3-0790-44b3-b013-f7ff8f89a34c",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "561c4e93-1e14-438c-be62-c3af869f6308",
+      "rating": 5,
+      "text": "nice your aap",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "10f33a78-b986-4524-8cd6-70762bcfe821",
+      "rating": 3,
+      "text": "confusing app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "8caab709-ec2d-4778-a964-9419aba5291b",
+      "rating": 5,
+      "text": "w vel ki w ssi s s s s s s a sa a is A good a sa aWaa Ss a mohammad ss s EE 6S se A xx, a",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c3a8c436-786c-4d02-9d05-1c866baeaefc",
+      "rating": 1,
+      "text": "This app isn't good. They deduct brokerage charges at will. Sometimes 78, sometimes 84, sometimes 64. It's not a good app these days. This is froud applications",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "9e93f106-2c9c-4fff-8fca-327551f32213",
+      "rating": 5,
+      "text": "dude ibse ujfwexhii ...",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "9df02d24-7a9a-4274-8394-0ad4450c7e73",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bf2cef86-3144-41ea-895e-000164b94755",
+      "rating": 1,
+      "text": "not good this application not good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "7d0eef27-e741-4672-b58c-0258d2ae5ab6",
+      "rating": 4,
+      "text": "great app go ahed",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c745fd62-813b-4c19-a150-d323674fbf2b",
+      "rating": 5,
+      "text": "you can money with late payments",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "eead7b30-a3e6-4f0d-a228-02d14d820db5",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "8fce15d0-4b52-4f0f-b4ac-f78718540782",
+      "rating": 1,
+      "text": "nifty trading dont use pls and grow inform will fake",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "2fd42c2b-c780-47a6-8222-26650da30a2e",
+      "rating": 5,
+      "text": "good Guru",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "622d207a-8342-45e0-ac3a-2f9f8a6c24fc",
+      "rating": 1,
+      "text": "isse ghatiya app koi nhi hai 3 se 4 bar order khud se execute ho jata hai or loss ho jata hai aj to hadd ho gya 7k ka loss ho gya ish gande app k vjh se",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "793b9299-d070-431c-8d78-105e5a898b12",
+      "rating": 5,
+      "text": "Best trading apps groww",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "a8f36880-b798-43c8-b8f4-a5df5c047729",
+      "rating": 5,
+      "text": "kindly restart refresh statement",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "2d9265b3-8ba9-49aa-b89e-a43d02381fec",
+      "rating": 1,
+      "text": "please uninstall app u will happily leave they're looting money from middle class making money carore in comition we trade los give tax scam only they're groww  don't",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1d49c440-fea9-4d52-9bfd-61bb67ebc069",
+      "rating": 1,
+      "text": "Rubbish app in terms of network optimization total failure even in 5g this app fails to load pathetic lower your brokerage if you can't provide service",
+      "date": "2026-03-10",
+      "thumbsUpCount": 1,
+      "language": null
+    },
+    {
+      "reviewId": "ab6d34bc-da83-49ae-a0dd-868efadf934a",
+      "rating": 2,
+      "text": "not show other mf in this app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "e5f45502-4d85-4c1a-83df-ee5f2bd0e4b2",
+      "rating": 5,
+      "text": "best app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "39e53e2d-714f-461b-9dcf-0d0c98566175",
+      "rating": 2,
+      "text": "Your option brokerage charges are too high. Application also lagging in profit trades. Unfortunately i have to look for another trading Application.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "9db328a7-f46d-44fb-90cb-27b724fba481",
+      "rating": 3,
+      "text": "l qualify",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bfc53eda-7d5f-4d53-b443-7ca2814ce4ea",
+      "rating": 1,
+      "text": "Today the app crashed & I got 3600 loss because of crashed. Not working the app to sell when I was at profit.. after 2 hour sold the trade at 3600 loss because of grow. third class chart view. wrong information showing in chart. on expiry of nifty opposite direction showing from trading view. when you got loss then showing the perfect chart.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "0029805a-b11c-4325-82aa-d963b41edb54",
+      "rating": 5,
+      "text": "better app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "773e0230-5cea-47d8-bafa-2c43479b3627",
+      "rating": 1,
+      "text": "very bad and selfish when we go on profit this app is massage we and to scare",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "174649df-4940-4e85-9fca-aee32df50bf2",
+      "rating": 5,
+      "text": "all in one groww is best",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6399223b-dee3-47ab-98b9-9e811fdcdef6",
+      "rating": 4,
+      "text": "OK nice",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "190f7009-6f02-47b8-98d4-768f220e255f",
+      "rating": 1,
+      "text": "don't use this app totally froud",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "b928d4e1-6cd2-4ade-9dd8-d2f7af716a76",
+      "rating": 5,
+      "text": "best broker",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "e6474b1e-b79e-429c-b4a6-cd1ae721fb0d",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1263006f-f72a-4942-93c9-24244486d91b",
+      "rating": 5,
+      "text": "friendly app to use",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "e211ab36-6323-4bc0-98fd-4e2359d14c9c",
+      "rating": 5,
+      "text": "all ok",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bbec5807-1079-43db-b542-b6f5b044d6bd",
+      "rating": 5,
+      "text": "nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "7173cc9f-a3e1-42f2-9d14-94e92d380389",
+      "rating": 5,
+      "text": "good service, all information get on platform easily and easy to operate it. Thank you",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "147cda66-1036-42c9-b46b-8c42689c1767",
+      "rating": 5,
+      "text": "very nice",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "b423bcc1-f265-4c77-87a5-5fe274865c4b",
+      "rating": 1,
+      "text": "One of the most useless apps in terms of mutual fund investment, there is no help from customer service, waiting for a long time does not give any response, please open an account in other apps but never open an account in groww",
+      "date": "2026-03-10",
+      "thumbsUpCount": 1,
+      "language": null
+    },
+    {
+      "reviewId": "4d9044f1-04e9-4614-b341-9eac691424ad",
+      "rating": 5,
+      "text": "good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "7c7a40b7-2dde-40ef-a4cf-53bf82ab8fc8",
+      "rating": 5,
+      "text": "Good App for investing in stock market",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "5b501db1-0e5b-43d6-b0f1-9f7add9724cb",
+      "rating": 5,
+      "text": "good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "03ea4fce-41b8-4bf5-bcd1-d97976cc4724",
+      "rating": 5,
+      "text": "Thanks for updating customised portfolio in holding. But I am unable to see XIRR in my customised portfolio.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "a9040573-ecd9-42da-b612-1a0f4538138d",
+      "rating": 5,
+      "text": "good one",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "926ec3ab-9f10-48ba-aead-4e35ad06efce",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "99249497-5b61-484b-9d26-48f419d7d1ce",
+      "rating": 5,
+      "text": "best app for stock market",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "84f04fe5-7e34-4d9e-a852-80688a1bcd57",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "7d9c8b33-5add-4ac4-bd3a-0c1468212348",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "494c86ec-05ea-46a3-9672-e9f837fc34e5",
+      "rating": 5,
+      "text": "good Platform ,Im using from 2019",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "291420a7-cc03-42e2-a70c-78069a6be0e0",
+      "rating": 5,
+      "text": "good job",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c2aedfe6-391c-4bbc-8339-c484177c45ad",
+      "rating": 5,
+      "text": "good guide & beeter",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "dcccbc36-0d35-47f5-a97e-e9c125f26efd",
+      "rating": 5,
+      "text": "pl make easy withdrawal option",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "1bbcce39-01fb-4942-af27-b57a88c22d9c",
+      "rating": 5,
+      "text": "high brokerage",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bda214e4-240f-4258-8d93-7801ed071587",
+      "rating": 2,
+      "text": "a bi nahi 2q",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c31cce09-f1a7-4b6d-b465-bbfd06666e25",
+      "rating": 5,
+      "text": "Direct funds are processed smoothly and quickly",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "70931187-3267-496f-99ab-c1a634219a4b",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c9c1d9ec-34cf-4860-a5a0-f204b60ba60d",
+      "rating": 1,
+      "text": "The app say I am very good trading app but he i not a good trading app this app thinking only one our profit not trader profit he say I charge very cheap but very hard charge.one trading charge is 54 rupees.it is cheap price ont cheap price.it is very high price.so i think not good app for trading",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f1d9c9f1-11e3-46d9-86a4-3e5fb39dfd70",
+      "rating": 5,
+      "text": "best app for trading platform",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "8bf82cc6-f124-419a-ad2a-feb7b391f3b4",
+      "rating": 5,
+      "text": "very nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "d73b7072-1f50-4821-a809-b5434b786db2",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "212733a4-e330-41ee-a5a1-98677a74caf9",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "25b0dc57-d5a5-40fd-bc8c-5da30732ca4a",
+      "rating": 1,
+      "text": "Never do option trading in Groww because GTT orders only trade above our price. disappointed groww",
+      "date": "2026-03-10",
+      "thumbsUpCount": 7,
+      "language": null
+    },
+    {
+      "reviewId": "b72353b8-649d-4e08-91ce-d830ef8225c4",
+      "rating": 5,
+      "text": "very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "70eb5d7e-369f-4aeb-961f-5c9eead6e99b",
+      "rating": 5,
+      "text": "best sellers",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "938a4df9-33b3-4886-a6bf-56cd939c83d4",
+      "rating": 1,
+      "text": "if u are small trader or invester I recommend never go on this platform they give to kuch charge which accumulated your profits.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "d1232850-e0b0-4d7f-bfbc-2a7a099854e9",
+      "rating": 5,
+      "text": "groww app is best app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "e223bf2d-dbdb-4c72-9041-5cf6cb469f73",
+      "rating": 5,
+      "text": "very nice",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6b7ed850-0129-455e-be99-d4cf6421a64c",
+      "rating": 5,
+      "text": "nice one",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "ad6fb7ba-09dd-4cb9-b608-1e6375b1ebff",
+      "rating": 5,
+      "text": "good option to invest,n gives opportunity to save money",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c087bd2d-e8c5-433d-af57-7f1505bf6b42",
+      "rating": 5,
+      "text": "n..I.. c...e",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "bbdad4d0-a07e-4cb8-982f-7fac8350d1b7",
+      "rating": 5,
+      "text": "good application",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "dd5c9bdc-ccb8-45e7-89e3-0de6f59a41ab",
+      "rating": 5,
+      "text": "nice service",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "324e75cc-814a-4ff0-a6e9-7227d3cce3fc",
+      "rating": 5,
+      "text": "Gud grow app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "8d765fc5-c4ee-4dd5-8539-94ca49d65b4f",
+      "rating": 3,
+      "text": "Not able to explain refresh my mutual funds from last 2 weeks. please fix it ASAP.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "070ad47e-2807-4aee-9df8-dd70255d6d11",
+      "rating": 5,
+      "text": "I have no experience",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f719c769-0efd-4d28-8eda-4dc0393fd0f8",
+      "rating": 1,
+      "text": "App lagging reflecting of latest SEBI guidelines.",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f27eb893-021b-45e5-885d-a5709fc0a636",
+      "rating": 5,
+      "text": "good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "8e37f4a9-2e9f-41c4-a066-51bd7254033f",
+      "rating": 5,
+      "text": "good app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "2c2fb79c-d6e4-400e-887f-a5081046ce7a",
+      "rating": 5,
+      "text": "very interesting",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "416790df-1874-4c55-b415-3b75f0147311",
+      "rating": 5,
+      "text": "best app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f4343bb1-d060-4150-b9e4-b6fa7ab31298",
+      "rating": 5,
+      "text": "Best app to invest and learn how stock market will move",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "ee463e69-df6d-417e-8099-7669333ac05c",
+      "rating": 1,
+      "text": "worst experience with this broker i will suggest everyone not to use this broker this broker will scam your mutual funds",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "ddf4ffc5-58dc-437b-9968-fb66bdc070ae",
+      "rating": 4,
+      "text": "nice app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "c6ce1cbe-5a82-469d-ad7c-a305dbbdefbe",
+      "rating": 5,
+      "text": "nice easy use",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "a21a21b1-4b55-4ffd-8eb3-cdd05c0d7775",
+      "rating": 5,
+      "text": "very very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "723a01d3-bffa-457b-bc2f-6b8afbc0d53c",
+      "rating": 5,
+      "text": "best app ever made",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "0359dfec-2cc8-412d-a83b-20739424ce4f",
+      "rating": 5,
+      "text": "viry nice",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "63eba4eb-ff43-434f-bd21-0bb4c791c48b",
+      "rating": 5,
+      "text": "experience is very good",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "60a93b1c-4f4b-46d2-9a72-6ff1fe5fcf54",
+      "rating": 5,
+      "text": "super app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "172efa9e-73fa-4541-8269-6a6cbad5acb5",
+      "rating": 5,
+      "text": "nice for beginners trader",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "f23d9569-a4c3-4bb8-a690-afbaef569871",
+      "rating": 5,
+      "text": "is supper app",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "6574b27b-3c9d-436e-9f75-00ef136b2228",
+      "rating": 2,
+      "text": "I have been trying to update my external mutual fund holdings for the last one week, but every time it shows that the “Updation of external holdings is paused.” Could you please confirm how long this will continue and when the service is expected to resume?",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    },
+    {
+      "reviewId": "5601ecbf-be4b-43bd-bf3c-341be4468257",
+      "rating": 1,
+      "text": "ek din amount add hoti hai next day add nhi hoti . upi set up maangta hai bhut hi 3rd class app hai index options ki oi dekhne ka koi option hi nhi hai",
+      "date": "2026-03-10",
+      "thumbsUpCount": 0,
+      "language": null
+    }
+  ],
+  "summary": {
+    "total_reviews": 200,
+    "rating_distribution": {
+      "5": 148,
+      "1": 29,
+      "4": 10,
+      "2": 8,
+      "3": 5
+    },
+    "date_range": {
+      "start": "2026-03-10",
+      "end": "2026-03-11"
+    }
+  }
+}

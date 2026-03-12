@@ -1,0 +1,43 @@
+# Groww App: Weekly Review Pulse
+
+**Period:** 2026-03-11 to 2026-03-11
+**Reviews analyzed:** 131
+
+---
+
+## Top 3 Themes
+
+### 1. Overall App Experience (2 reviews, positive)
+
+Many users express high satisfaction with the app, finding it very good, secure, easy to use, and a great platform for investing and trading.
+
+### 2. External Fund Tracking (0 reviews, negative)
+
+Users are consistently frustrated by the inability to track or refresh their external mutual fund holdings, as this crucial feature is frequently paused or not working.
+
+### 3. High Brokerage & Charges (0 reviews, negative)
+
+A significant number
+
+---
+
+## What Users Are Saying
+
+> "nice game groww kro or paise kamai"
+> Rating: 5/5
+
+> "very good app"
+> Rating: 5/5
+
+> "nice game groww kro or paise kamai"
+> Rating: 5/5
+
+---
+
+## Action Ideas
+
+1. **Improve External Fund Tracking:** Develop a reliable feature to track and refresh external mutual fund holdings to address user frustration.
+
+2. **Review Brokerage and Charges:** Conduct a thorough review of Groww's brokerage and charges to identify areas for reduction or optimization.
+
+3. **Enhance User Engagement:** Implement a rewards or gamification system, as hinted in quote [1], to encourage user participation and retention on the Groww platform.

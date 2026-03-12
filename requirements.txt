@@ -1,0 +1,8 @@
+groq
+google-play-scraper
+python-dotenv
+pytest
+google-generativeai
+markdown
+fastapi
+uvicorn[standard]
