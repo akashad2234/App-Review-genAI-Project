@@ -27,6 +27,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/")
+def root() -> Dict[str, str]:
+    return {
+        "status": "ok",
+        "message": "Groww Weekly Review Pulse API. See /api/health for health check.",
+    }
+
 # In-memory store: run_id -> RunResult (for synchronous runs)
 _runs: Dict[str, RunResult] = {}
 _latest_run_id: Optional[str] = None
