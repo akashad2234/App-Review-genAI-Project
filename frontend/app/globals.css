@@ -11,6 +11,37 @@ body {
   color: #e5e7eb;
 }
 
+.nav-tab {
+  position: relative;
+  padding: 0.35rem 0;
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22c55e, #a3e635);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.nav-tab-active {
+  color: #e5e7eb;
+}
+
+.nav-tab-active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
 button {
   font: inherit;
 }
@@ -102,5 +133,32 @@ button {
   font-size: 0.8rem;
   line-height: 1.4;
   color: #cbd5f5;
+}
+
+.pill-toggle-group {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.pill-toggle {
+  min-width: 3.25rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.pill-toggle-active {
+  background: linear-gradient(to right, #22c55e, #a3e635);
+  color: #020617;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.55);
 }
 

@@ -27,7 +27,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [runMessage, setRunMessage] = useState<string | null>(null);
   const [showReport, setShowReport] = useState(false);
-  const [weeks, setWeeks] = useState<number>(8);
+  const [reviewWindowDays, setReviewWindowDays] = useState<7 | 14 | 21 | 28>(7);
   const [maxReviews, setMaxReviews] = useState<number | "">(5000);
   const [recipientEmail, setRecipientEmail] = useState<string>("");
   const [recipientName, setRecipientName] = useState<string>("");
@@ -69,6 +69,7 @@ export default function DashboardPage() {
     setError(null);
     setRunMessage(null);
     try {
+      const weeks = reviewWindowDays / 7;
       const res = await fetch(`${API_BASE_URL}/api/pulse/run`, {
         method: "POST",
         headers: {
@@ -78,6 +79,7 @@ export default function DashboardPage() {
           weeks,
           max_reviews: maxReviews,
           send_email: sendEmail,
+          recipient_email: recipientEmail.trim() || undefined,
         }),
       });
       if (!res.ok) {
@@ -171,20 +173,113 @@ export default function DashboardPage() {
 
   return (
     <main className="space-y-8">
-      <header className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Groww Weekly Review Pulse
-        </h1>
-        <p className="mt-1 text-sm text-slate-400">
-          Generate the one-page weekly pulse from Play Store reviews and send it by email.
-        </p>
-      </header>
+      <section className="card mb-8">
+        <div className="card-header pb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+            Live · Play Store
+          </p>
+          <h1 className="mt-2 text-3xl font-semibold leading-tight text-slate-50">
+            Groww App
+            <span className="block text-emerald-300">Review Pulse</span>
+          </h1>
+          <p className="mt-3 text-sm text-slate-400 max-w-xl">
+            Scrapes live reviews, runs AI analysis, and delivers a one-page
+            health pulse to your team.
+          </p>
+        </div>
+        <div className="card-body pb-4">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-4">
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                  Review window
+                </p>
+                <div className="pill-toggle-group">
+                  {[7, 14, 21, 28].map((days) => (
+                    <button
+                      key={days}
+                      type="button"
+                      className={`pill-toggle ${
+                        reviewWindowDays === days ? "pill-toggle-active" : ""
+                      }`}
+                      onClick={() =>
+                        setReviewWindowDays(days as 7 | 14 | 21 | 28)
+                      }
+                    >
+                      {days}d
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                  Email recipients
+                  <span className="ml-1 text-[0.65rem] font-normal text-slate-500">
+                    (optional, comma-separated)
+                  </span>
+                </p>
+                <input
+                  type="email"
+                  multiple
+                  placeholder="pm@company.com, ceo@company.com"
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-xs text-slate-100 outline-none ring-0 focus:border-emerald-400"
+                  value={recipientEmail}
+                  onChange={(e) => setRecipientEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-[0.75rem] text-slate-300">
+                  Max reviews to fetch
+                </label>
+                <input
+                  type="number"
+                  className="w-full max-w-xs rounded-md border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 outline-none focus:border-emerald-400"
+                  value={maxReviews === "" ? "" : maxReviews}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    const value = e.target.value;
+                    if (value === "") {
+                      setMaxReviews("");
+                      return;
+                    }
+                    const parsed = Number(value);
+                    setMaxReviews(
+                      Number.isNaN(parsed) ? 0 : Math.max(0, parsed),
+                    );
+                  }}
+                  min={0}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-stretch gap-3 md:w-64">
+              <button
+                className="btn btn-primary w-full py-2 text-sm"
+                disabled={loadingRun}
+                onClick={() => void triggerRun(true)}
+              >
+                {loadingRun
+                  ? "Running pulse..."
+                  : `Run ${reviewWindowDays}-Day Pulse`}
+              </button>
+              <p className="text-[0.7rem] text-slate-400">
+                Pipeline: <span className="text-slate-200">Scrape</span>{" "}
+                reviews · <span className="text-slate-200">Analyse</span>{" "}
+                themes · <span className="text-slate-200">Report</span> one-page
+                pulse · <span className="text-slate-200">Email</span> your
+                team.
+              </p>
+              {runMessage && (
+                <p className="text-[0.75rem] text-emerald-300">{runMessage}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <section className="card mb-10">
+      <section className="card mb-6">
         <div className="card-header">
-          <h2 className="text-lg font-medium">Status</h2>
+          <h2 className="text-lg font-medium">Pipeline status</h2>
           <p className="mt-1 text-xs text-slate-400">
-            Each step in the weekly pulse pipeline.
+            End-to-end health for the latest run.
           </p>
         </div>
         <div className="card-body flex flex-wrap items-center gap-2 text-xs">
@@ -210,65 +305,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="card mb-10">
-        <div className="card-header">
-          <h2 className="text-lg font-medium">Run pipeline</h2>
-        </div>
-        <div className="card-body space-y-5 text-xs text-slate-400">
-          <p>
-            Scrape reviews → discover themes → classify → generate report →
-            create draft email. This may take several minutes.
-          </p>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-[0.75rem] text-slate-300">
-                Weeks of reviews (8–12)
-              </label>
-              <select
-                value={weeks}
-                onChange={(e) => setWeeks(Number(e.target.value))}
-                className="w-full rounded-md border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 outline-none focus:border-emerald-400"
-              >
-                <option value={8}>8 weeks</option>
-                <option value={10}>10 weeks</option>
-                <option value={12}>12 weeks</option>
-              </select>
-            </div>
-            <div>
-              <label className="mb-1 block text-[0.75rem] text-slate-300">
-                Max reviews to fetch
-              </label>
-              <input
-                type="number"
-                className="w-full rounded-md border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 outline-none focus:border-emerald-400"
-                value={maxReviews === "" ? "" : maxReviews}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  const value = e.target.value;
-                  if (value === "") {
-                    setMaxReviews("");
-                    return;
-                  }
-                  const parsed = Number(value);
-                  setMaxReviews(Number.isNaN(parsed) ? 0 : Math.max(0, parsed));
-                }}
-                min={0}
-              />
-            </div>
-          </div>
-          <button
-            className="btn btn-primary"
-            disabled={loadingRun}
-            onClick={() => void triggerRun(true)}
-          >
-            {loadingRun ? "Running..." : "Run full pipeline"}
-          </button>
-          {runMessage && (
-            <p className="text-[0.75rem] text-emerald-300">{runMessage}</p>
-          )}
-        </div>
-      </section>
-
-      <section className="card mb-10">
+      <section className="card mb-8">
         <div className="card-header flex items-center justify-between gap-3">
           <div>
             <h2 className="text-lg font-medium">View report</h2>
