@@ -2,6 +2,8 @@
 
 This project turns recent Groww Play Store reviews into a weekly one page pulse using Groq, then drafts an email with the note.
 
+**Deployment:** Frontend (Vercel) + Backend (Railway). See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for steps to deploy the frontend and connect it to the backend.
+
 Phase 1 is implemented:
 
 - Config loaded from environment via `src/config.py`.

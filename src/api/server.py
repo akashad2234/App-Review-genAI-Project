@@ -4,6 +4,7 @@ Run: uvicorn src.api.server:app --reload --port 8000
 """
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -19,9 +20,15 @@ app = FastAPI(
     description="Trigger pulse generation and email, get run status and latest report.",
 )
 
+_cors_origins_raw = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:3000,http://127.0.0.1:3000,https://app-review-gen-ai-project.vercel.app",
+)
+_cors_origins = [o.strip() for o in _cors_origins_raw.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
